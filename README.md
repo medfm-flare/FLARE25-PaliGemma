@@ -1,4 +1,4 @@
-# FLARE25-PaliGemma: Medical Multimodal Medical Image Analysis with Vision-Language Models
+# FLARE25-PaliGemma: Multimodal Medical Image Analysis
 
 [![Hugging Face Model](https://img.shields.io/badge/HuggingFace-yws0322%2Fflare25--paligemma2-blue?logo=huggingface)](https://huggingface.co/yws0322/flare25-paligemma2)
 
