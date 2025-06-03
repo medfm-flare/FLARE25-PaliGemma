@@ -1,13 +1,3 @@
-"""
-Data Preparation Script for PaliGemma2 Medical Image Training
-
-This script prepares multimodal medical datasets for training by:
-- Loading images and questions from various medical imaging datasets
-- Validating image files and filtering invalid samples
-- Creating training and validation splits
-- Saving processed data in HuggingFace dataset format
-"""
-
 import os
 import json
 import argparse

@@ -1,14 +1,3 @@
-"""
-PaliGemma2 Prediction Script for Medical Image Analysis
-
-This script performs inference on medical imaging datasets using fine-tuned PaliGemma2 model:
-- Automatically discovers JSON files in specified dataset directories
-- Handles multiple image inputs per sample
-- Supports various medical imaging tasks (classification, detection, counting, etc.)
-- Applies task-specific answer parsing
-- Saves predictions in JSON format for evaluation
-"""
-
 import os
 import json
 import argparse

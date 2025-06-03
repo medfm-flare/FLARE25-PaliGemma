@@ -1,11 +1,3 @@
-"""
-PaliGemma2 Fine-tuning Script for Medical Image Analysis
-
-This script fine-tunes a PaliGemma2 model for medical image question answering tasks.
-It supports LoRA (Low-Rank Adaptation) for efficient training and 4-bit quantization
-to reduce memory usage.
-"""
-
 import os
 import torch
 import argparse
