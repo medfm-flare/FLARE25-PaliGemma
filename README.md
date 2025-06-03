@@ -143,7 +143,7 @@ python eval.py \
 
 ---
 
-## Results (Validation Public)
+## Results
 
 Below is a comparison of the main evaluation metrics between the base (pretrained) model and the fine-tuned model on the FLARE25 validation set.
 
