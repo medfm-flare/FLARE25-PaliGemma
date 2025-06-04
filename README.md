@@ -1,4 +1,4 @@
-# FLARE25-PaliGemma: Medical Multimodal Medical Image Analysis with Vision-Language Models
+# FLARE25-PaliGemma: Multimodal Medical Image Analysis
 
 [![Hugging Face Model](https://img.shields.io/badge/HuggingFace-yws0322%2Fflare25--paligemma2-blue?logo=huggingface)](https://huggingface.co/yws0322/flare25-paligemma2)
 
@@ -143,21 +143,21 @@ python eval.py \
 
 ---
 
-## Results (Validation Public)
+## Results
 
 Below is a comparison of the main evaluation metrics between the base (pretrained) model and the fine-tuned model on the FLARE25 validation set.
 
-| Task Type                  | Metric                | Base Model | Fine-tuned Model | #Examples (Base / Fine-tuned) |
-|----------------------------|----------------------|------------|------------------|-------------------------------|
-| Classification             | Balanced Accuracy    | 0.0020     | 0.4723           | 3513                          |
-| Multi-label Classification | F1-Score (micro)     | 0.0538     | 0.5040           | 1446                          |
-| Detection                  | F1-Score (IoU>0.5)   | 0.0000     | 0.3446           | 255                           |
-| Instance Detection         | F1-Score (IoU>0.5)   | 0.0000     | 0.0028           | 176                           |
-| Counting                   | MAE                  | 454.4500   | 295.65           | 100                           |
-| Regression                 | MAE                  | 28.7150    | 16.50            | 100                           |
-| Report Generation          | GREEN Score (mean)   | 0.0041     | 0.7072           | 1945                          |
-å
-The fine-tuned model shows substantial improvements across all tasks, especially in classification, multi-label, detection, and report generation (GREEN score).
+| Task Type                  | Metric                | Base Model | Fine-tuned Model | #Examples        |
+|----------------------------|----------------------|------------|------------------|-------------------|
+| Classification             | Balanced Accuracy    | 0.0020     | 0.4723           | 3513              |
+| Multi-label Classification | F1-Score (micro)     | 0.0538     | 0.5040           | 1446              |
+| Detection                  | F1-Score (IoU>0.5)   | 0.0000     | 0.3446           | 255               |
+| Instance Detection         | F1-Score (IoU>0.5)   | 0.0000     | 0.0028           | 176               |
+| Counting                   | MAE                  | 454.4500   | 295.65           | 100               |
+| Regression                 | MAE                  | 28.7150    | 16.50            | 100               |
+| Report Generation          | GREEN Score (mean)   | 0.0041     | 0.7072           | 1945              |
+
+The fine-tuned model shows substantial improvements across all tasks, especially in classification, multi-label, detection, and report generation.
 
 ---
 
