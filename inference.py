@@ -116,7 +116,7 @@ def validate_paths(dataset_path, checkpoint_path):
 # ANSWER PARSING FUNCTIONS
 # ================================================================================
 
-def parse_answer(output, task_type=None, sample=None, input_file=None):
+def parse_answer(output, task_type=None):
     """Parse model output based on task type to extract the final answer."""
     output = output.strip()
     
@@ -137,7 +137,7 @@ def parse_answer(output, task_type=None, sample=None, input_file=None):
     if task_type == "classification":
         return _parse_classification(output)
     elif task_type == "multi-label classification":
-        return _parse_multi_label_classification(output, sample, input_file)
+        return _parse_multi_label_classification(output)
     elif task_type in ["detection", "instance_detection"]:
         return _parse_detection(output)
     elif task_type in ["cell counting", "regression", "counting"]:
@@ -156,26 +156,12 @@ def _parse_classification(output):
         return last_line
     return output
 
-def _parse_multi_label_classification(output, sample=None, input_file=None):
+def _parse_multi_label_classification(output):
     """Parse multi-label classification task output."""
     lines = output.splitlines()
     labels = []
-    
-    # Determine dataset type
-    dataset_type = None
-    if sample and "DatasetName" in sample:
-        dataset_type = sample["DatasetName"].lower()
-    elif input_file:
-        # Extract dataset name from file path
-        file_path_lower = input_file.lower()
-        if "hidden" in file_path_lower:
-            dataset_type = "hidden"
-        elif "chestdr" in file_path_lower:
-            dataset_type = "chestdr"
-    
-    # Parse based on dataset type
     for line in lines:
-        for part in re.split(r'[;]', line):
+        for part in re.split(r'[;,]', line):
             label = part.strip()
             if label:
                 labels.append(label)
@@ -314,7 +300,7 @@ def predict_on_file(input_file, model, processor, max_new_tokens=1024, device="c
             )[0]
             
             # Parse answer based on task type
-            parsed_answer = parse_answer(output, sample.get("TaskType", ""), sample, input_file)
+            parsed_answer = parse_answer(output, sample.get("TaskType", ""))
             sample["Answer"] = parsed_answer
             
         except Exception as e:
