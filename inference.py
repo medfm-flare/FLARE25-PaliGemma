@@ -161,7 +161,7 @@ def _parse_multi_label_classification(output):
     lines = output.splitlines()
     labels = []
     for line in lines:
-        for part in re.split(r'[;,]', line):
+        for part in re.split(r'[;]', line):
             label = part.strip()
             if label:
                 labels.append(label)
