@@ -147,6 +147,8 @@ python eval.py \
 
 Below is a comparison of the main evaluation metrics between the base (pretrained) model and the fine-tuned model on the FLARE25 validation set.
 
+![Performance Comparison](assets/performance_comparison.png)
+
 | Task Type                  | Metric                | Base Model | Fine-tuned Model | #Examples        |
 |----------------------------|----------------------|------------|------------------|-------------------|
 | Classification             | Balanced Accuracy    | 0.0020     | 0.4723           | 3513              |
@@ -156,8 +158,6 @@ Below is a comparison of the main evaluation metrics between the base (pretraine
 | Counting                   | MAE                  | 454.4500   | 295.65           | 100               |
 | Regression                 | MAE                  | 28.7150    | 16.50            | 100               |
 | Report Generation          | GREEN Score (mean)   | 0.0041     | 0.7072           | 1945              |
-
-![Performance Comparison](assets/performance_comparison.png)
 
 The fine-tuned model shows substantial improvements across all tasks, especially in classification, multi-label, detection, and report generation.
 
