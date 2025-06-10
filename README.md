@@ -157,6 +157,8 @@ Below is a comparison of the main evaluation metrics between the base (pretraine
 | Regression                 | MAE                  | 28.7150    | 16.50            | 100               |
 | Report Generation          | GREEN Score (mean)   | 0.0041     | 0.7072           | 1945              |
 
+![Performance Comparison](assets/performance_comparison.png)
+
 The fine-tuned model shows substantial improvements across all tasks, especially in classification, multi-label, detection, and report generation.
 
 ---
