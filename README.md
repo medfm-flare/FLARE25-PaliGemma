@@ -147,6 +147,8 @@ python eval.py \
 
 Below is a comparison of the main evaluation metrics between the base (pretrained) model and the fine-tuned model on the FLARE25 validation set.
 
+![Performance Comparison](assets/performance_comparison.png)
+
 | Task Type                  | Metric                | Base Model | Fine-tuned Model | #Examples        |
 |----------------------------|----------------------|------------|------------------|-------------------|
 | Classification             | Balanced Accuracy    | 0.0020     | 0.4723           | 3513              |

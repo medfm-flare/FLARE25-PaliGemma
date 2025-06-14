@@ -6,6 +6,7 @@ import pandas as pd
 import random
 from datasets import Dataset
 from tqdm import tqdm
+import warnings
 
 
 # ================================================================================
@@ -129,11 +130,13 @@ def load_images_and_questions(base_dir, dataset_name, split, task_type, category
     def find_json_file(directory, split_type):
         """Find appropriate JSON file in the directory."""
         if not os.path.exists(directory):
+            warnings.warn(f"Directory does not exist: {directory}")
             return None
             
         json_files = [f for f in os.listdir(directory) if f.endswith('.json')]
         
         if not json_files:
+            warnings.warn(f"No JSON files found in directory: {directory}")
             return None
         
         return os.path.join(directory, json_files[0])
@@ -142,6 +145,7 @@ def load_images_and_questions(base_dir, dataset_name, split, task_type, category
     
     # Check if files exist
     if not os.path.exists(image_dir) or not question_file or not os.path.exists(question_file):
+        warnings.warn(f"Missing required files for {dataset_name} {split}: image_dir={image_dir}, question_file={question_file}")
         return []
     
     print(f"Using question file: {os.path.basename(question_file)}")
@@ -170,7 +174,12 @@ def load_images_and_questions(base_dir, dataset_name, split, task_type, category
             
             for img_name in image_name:
                 img_path = os.path.join(image_dir, os.path.basename(img_name))
-                if not os.path.exists(img_path) or not validate_image(img_path):
+                if not os.path.exists(img_path):
+                    warnings.warn(f"Image file not found: {img_path}")
+                    valid = False
+                    break
+                if not validate_image(img_path):
+                    warnings.warn(f"Invalid image file: {img_path}")
                     valid = False
                     break
                 image_paths.append(img_path)
@@ -181,7 +190,11 @@ def load_images_and_questions(base_dir, dataset_name, split, task_type, category
         else:
             # Handle single image
             image_path = os.path.join(image_dir, os.path.basename(image_name))
-            if not os.path.exists(image_path) or not validate_image(image_path):
+            if not os.path.exists(image_path):
+                warnings.warn(f"Image file not found: {image_path}")
+                continue
+            if not validate_image(image_path):
+                warnings.warn(f"Invalid image file: {image_path}")
                 continue
             image_data = [image_path]
         
