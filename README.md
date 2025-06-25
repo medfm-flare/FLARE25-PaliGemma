@@ -163,6 +163,121 @@ The fine-tuned model shows substantial improvements across all tasks, especially
 
 ---
 
+## Docker Usage
+
+We provide a pre-built Docker image for easy deployment and testing. The Docker image contains all necessary dependencies and the fine-tuned model.
+
+### Option 1: Load from tar.gz file (Recommended)
+
+Download the[pre-built Docker](https://drive.google.com/file/d/1M1MQU27g11tcd3tP9cuXfm7kxAOxgqUI/view?usp=drive_link) image and load it:
+
+```bash
+# Download the Docker image (provided separately)
+# docker load -i flare25-paligemma2.tar.gz
+docker load -i flare25-paligemma2.tar.gz
+```
+
+### Option 2: Build from source
+
+**Docker files:**
+```
+docker/
+├── Dockerfile              # Docker image definition
+├── requirements.txt        # Python dependencies  
+├── inference.py            # Main inference script
+├── download_models.py      # Model download utility
+└── predict.sh             # Inference execution script
+```
+
+```bash
+# Navigate to docker directory
+cd docker
+
+# Build the Docker image with Hugging Face token
+docker build -f Dockerfile -t flare25-paligemma2 \
+    --build-arg HUGGINGFACE_TOKEN=your_hf_token_here .
+```
+
+### Running Inference
+
+Prepare your demo test data in the [`test-fake/`](https://drive.google.com/file/d/1QJcfTajYxqbpqqS1mVtUN6Phc8c1dUhV/view?usp=drive_link) directory and run:
+
+```bash
+# Create output directory
+mkdir -p flare25-paligemma2_output
+
+# Run inference on demo images  
+docker container run \
+    --gpus "device=0" \
+    -m 28G \
+    --name flare25-paligemma2 \
+    --rm \
+    -v $PWD/test-fake/:/workspace/inputs/ \
+    -v $PWD/flare25-paligemma2_output/:/workspace/outputs/ \
+    flare25-paligemma2:latest \
+    /bin/bash -c "sh predict.sh"
+```
+
+**Note:** The Docker container expects:
+- Input data mounted to `/workspace/inputs/`
+- Output directory mounted to `/workspace/outputs/` 
+- Input should follow the validation-hidden structure with JSON files and `imagesTs/` directories
+
+### Input/Output Format
+
+**Input format** (JSON):
+```json
+[
+  {
+    "ImageName": "imagesTs/image1.png",
+    "Question": "What abnormalities are visible in this image?",
+    "TaskType": "classification",
+    "Answer": ""
+  }
+]
+```
+
+**Output format** (JSON):
+```json
+[
+  {
+    "ImageName": "imagesTs/image1.png", 
+    "Question": "What abnormalities are visible in this image?",
+    "TaskType": "classification",
+    "Answer": "Pneumonia detected in the right lung"
+  }
+]
+```
+
+### System Requirements
+
+- Docker with GPU support (nvidia-docker2)
+- NVIDIA GPU with 24GB+ VRAM
+- 28GB+ RAM allocation
+- CUDA 11.8 or 12.0+
+
+### Save Docker Image
+
+To create a distributable tar.gz file:
+
+```bash
+# Save the Docker image to tar.gz
+docker save flare25-paligemma2:latest | gzip -c > flare25-paligemma2.tar.gz
+```
+
+### Notes
+
+- **Hugging Face Token Required**: PaliGemma2 is a gated model requiring HF authentication
+- The Docker image includes the fine-tuned model weights
+- Input images should be placed in `test-fake/` directory following validation-hidden structure
+- Results will be saved in `flare25-paligemma2_output/` directory  
+- Run `chmod -R 777 ./*` if you encounter permission issues
+- Docker image size: ~15-20GB (includes model weights)
+- The `predict.sh` script automatically runs inference on all JSON files in `/workspace/inputs/`
+- Model download happens during Docker build (requires internet connection)
+
+---
+
 ## Model Download & Usage
 
 - **Hugging Face Model Card:** [yws0322/flare25-paligemma2](https://huggingface.co/yws0322/flare25-paligemma2)
