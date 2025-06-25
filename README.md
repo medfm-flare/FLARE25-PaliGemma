@@ -169,7 +169,7 @@ We provide a pre-built Docker image for easy deployment and testing. The Docker 
 
 ### Option 1: Load from tar.gz file (Recommended)
 
-Download the[pre-built Docker](https://drive.google.com/file/d/1M1MQU27g11tcd3tP9cuXfm7kxAOxgqUI/view?usp=drive_link) image and load it:
+Download the [pre-built Docker](https://drive.google.com/file/d/1M1MQU27g11tcd3tP9cuXfm7kxAOxgqUI/view?usp=drive_link) image and load it:
 
 ```bash
 # Download the Docker image (provided separately)
@@ -200,7 +200,7 @@ docker build -f Dockerfile -t flare25-paligemma2 \
 
 ### Running Inference
 
-Prepare your demo test data in the [`test-fake/`](https://drive.google.com/file/d/1QJcfTajYxqbpqqS1mVtUN6Phc8c1dUhV/view?usp=drive_link) directory and run:
+Prepare your [demo test data](https://drive.google.com/file/d/1QJcfTajYxqbpqqS1mVtUN6Phc8c1dUhV/view?usp=drive_link) in the `test-fake/` directory and run:
 
 ```bash
 # Create output directory
